@@ -5,7 +5,7 @@ import mapImg from '../assets/hero/peta-indonesia.png';
 import candiImg from '../assets/hero/candi-borobudur.png';
 import pahlawanImg from '../assets/hero/pahlawan.png';
 
-const Hero = () => {
+const HeroSection = () => {
   return (
     // SECTION UTAMA: Membungkus seluruh area Hero. 
     <section 
@@ -72,4 +72,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroSection;

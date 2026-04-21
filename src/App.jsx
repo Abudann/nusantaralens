@@ -1,16 +1,18 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import NavbarSection from './components/NavbarSection';
+import HeroSection from './components/HeroSection';
 import PreviewSection from './components/PreviewSection';
+import AIAssistantSection from './components/AiAssistantSection';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="relative">
-        <Navbar />
-        <Hero />
+        <NavbarSection />
+        <HeroSection />
         <PreviewSection /> 
+        <AIAssistantSection />
       </div>
     </BrowserRouter>
   );

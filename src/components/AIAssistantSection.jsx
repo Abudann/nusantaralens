@@ -12,10 +12,10 @@ const AiAssistantSection = () => {
       {/* --- KONTEN UTAMA --- */}
       <div className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
         
-        <h2 className="text-5xl md:text-6xl font-bold font-['Merriweather_Sans'] text-gray-500 mb-2">
+        <h2 className="text-5xl md:text-6xl font-bold font-teachers text-gray-500 mb-2">
           Eksplorasi dengan
         </h2>
-        <h2 className="text-5xl md:text-6xl font-bold font-['Merriweather_Sans'] text-[#008781] mb-6">
+        <h2 className="text-5xl md:text-6xl font-bold font-teachers text-[#008781] mb-6">
           NusantaraLens AI
         </h2>
         

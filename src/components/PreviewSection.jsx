@@ -20,7 +20,7 @@ const PreviewSection = () => {
         
         {/* KIRI: TEKS */}
         <div className="md:w-5/12 text-white">
-          <h2 className="text-5xl md:text-6xl font-bold font-['Merriweather_Sans'] mb-6 tracking-wide">Budaya</h2>
+          <h2 className="text-5xl md:text-6xl font-bold font-teachers mb-6 tracking-wide">Budaya</h2>
           <p className="text-base md:text-lg font-teachers leading-relaxed mb-8 text-gray-200">
             Budaya Indonesia bukan sekadar warisan, tapi sumber inspirasi yang tak ada habisnya. Mari menyelami ragam adat dan karya seni ikonik yang membuat dunia terpana pada pesona Nusantara.
           </p>

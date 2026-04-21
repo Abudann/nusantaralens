@@ -26,7 +26,7 @@ const Navbar = () => {
       }`}
     >
       {/* LOGO */}
-      <div className="text-xl md:text-2xl font-bold font-Teachers">
+      <div className="text-xl md:text-2xl font-bold font-teachers">
         <Link to="/">Nusantaralens</Link>
       </div>
 

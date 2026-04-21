@@ -1,9 +1,9 @@
 import { FaArrowRight } from 'react-icons/fa';
 
 // Mengimpor aset gambar dari folder assets
-import mapImg from '../assets/peta-indonesia.png';
-import candiImg from '../assets/candi-borobudur.png';
-import pahlawanImg from '../assets/pahlawan.png';
+import mapImg from '../assets/hero/peta-indonesia.png';
+import candiImg from '../assets/hero/candi-borobudur.png';
+import pahlawanImg from '../assets/hero/pahlawan.png';
 
 const Hero = () => {
   return (

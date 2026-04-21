@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     // NAVBAR UTAMA: Menggunakan efek blur kaca (backdrop-blur-md)
-    <nav className="absolute top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-white/10 backdrop-blur-md border-b border-white/5 text-white">
-      
-      {/* LOGO NAVBAR */}
+    <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-black/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300">
       <div className="text-2xl font-bold font-teachers tracking-wider">
         Nusantaralens
       </div>
       
       {/* MENU DESKTOP */}
-      {/* PERBAIKAN: Menggunakan font-teachers dan text-base (16px) sesuai dengan Figma */}
       <div className="hidden md:flex gap-8 text-base font-teachers font-normal">
         <Link to="/" className="hover:text-nl-brown transition">Home</Link>
         <Link to="/explore" className="hover:text-nl-brown transition">Explore</Link>

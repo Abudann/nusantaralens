@@ -1,15 +1,18 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import PreviewSection from './components/PreviewSection';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-nl-cream">
+    <BrowserRouter>
+      <div className="relative">
         <Navbar />
         <Hero />
+        <PreviewSection /> 
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

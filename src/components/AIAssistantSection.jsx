@@ -6,8 +6,8 @@ const AiAssistantSection = () => {
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#F4F6F5] overflow-hidden py-24 shadow-[inset_0_10px_20px_rgba(0,0,0,0.03)]">
 
       {/* --- EFEK BLOB (GLOWING GREEN) --- */}
-      <div className="absolute left-[-10%] top-[30%] w-[500px] h-[500px] bg-[#008781] rounded-full mix-blend-multiply filter blur-[150px] opacity-60 animate-pulse pointer-events-none z-0"></div>
-      <div className="absolute right-[-10%] top-[40%] w-[400px] h-[400px] bg-[#008781] rounded-full mix-blend-multiply filter blur-[150px] opacity-50 pointer-events-none delay-1000 z-0"></div>
+      <div className="absolute left-[-5%] top-[10%] w-[400px] h-[400px] bg-[#008781] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-pulse pointer-events-none z-0"></div>
+      <div className="absolute right-[-5%] top-[15%] w-[350px] h-[350px] bg-[#008781] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none delay-1000 z-0"></div>
 
       {/* --- KONTEN UTAMA --- */}
       <div className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center flex flex-col items-center">

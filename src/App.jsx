@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection';
 import PreviewSection from './components/PreviewSection';
 import AIAssistantSection from './components/AiAssistantSection';
 import InsightSection from './components/InsightSection';
+import FooterSection from './components/FooterSection';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <PreviewSection /> 
         <AIAssistantSection />
         <InsightSection />
+        <FooterSection />
       </div>
     </BrowserRouter>
   );

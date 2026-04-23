@@ -8,7 +8,6 @@ const InsightSection = () => {
     <section className="relative w-full min-h-screen bg-[#D4D9D7] py-32 flex flex-col items-center overflow-hidden">
       
       {/* --- JEMBATAN TRANSISI DARI AI ASSISTANT KE INSIGHT --- */}
-      {/* Ini yang bikin warnanya meleleh mulus dan garis potongnya hilang! */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-56 bg-gradient-to-b from-[#F4F6F5] to-transparent z-10 pointer-events-none"></div>
 
       {/* --- KONTEN TEKS --- */}

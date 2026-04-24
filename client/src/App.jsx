@@ -1,24 +1,14 @@
-import { BrowserRouter } from 'react-router-dom';
-
-import NavbarSection from './components/NavbarSection';
-import HeroSection from './components/HeroSection';
-import PreviewSection from './components/PreviewSection';
-import AIAssistantSection from './components/AiAssistantSection';
-import InsightSection from './components/InsightSection';
-import FooterSection from './components/FooterSection';
+// Isi dari file: client/src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="relative">
-        <NavbarSection />
-        <HeroSection />
-        <PreviewSection /> 
-        <AIAssistantSection />
-        <InsightSection />
-        <FooterSection />
-      </div>
-    </BrowserRouter>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 

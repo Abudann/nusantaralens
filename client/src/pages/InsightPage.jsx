@@ -1,58 +1,18 @@
-import { FaArrowRight } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
+import NavbarSection from '../components/NavbarSection';
+import FooterSection from '../components/FooterSection';
+import pieChart from '../assets/insights/pie-chart.png';
+import barChart from '../assets/insights/bar-chart.png';
 
-const InsightSection = () => {
+const InsightPage = () => {
   return (
-    <section className="relative w-full min-h-screen bg-[#D4D9D7] py-32 flex flex-col items-center overflow-hidden">
-      
-      {/* --- JEMBATAN TRANSISI DARI AI ASSISTANT KE INSIGHT --- */}
-      <div className="absolute top-0 left-0 w-full h-32 md:h-56 bg-gradient-to-b from-[#F4F6F5] to-transparent z-10 pointer-events-none"></div>
+    <div className="w-full min-h-screen bg-[#D4D9D7] flex flex-col">
+      <NavbarSection />
 
-      {/* --- KONTEN TEKS --- */}
-      <div className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-        <h2 className="text-4xl md:text-6xl font-bold font-teachers text-[#008781] mb-2">
-          Wawasan Nusantara
-        </h2>
-        <h2 className="text-4xl md:text-6xl font-bold font-teachers text-gray-500 mb-6">
-          Demografi & Wilayah
-        </h2>
-        <p className="text-sm md:text-lg font-teachers text-gray-600 mb-10 max-w-3xl leading-relaxed">
-          Visualisasi pemetaan Nusantara yang memuat rincian informasi demografi dan identitas daerah. Portal ini berfungsi sebagai rujukan visual untuk memahami profil setiap provinsi di Indonesia secara kolektif.
-        </p>
-
-        <button className="flex items-center justify-between bg-white text-[#008781] w-[160px] md:w-[186px] h-[50px] md:h-[55px] rounded-full pl-5 pr-2 font-bold font-teachers hover:bg-gray-100 transition shadow-md border border-gray-100 group mb-16">
-          <span className="text-xs md:text-sm">Mulai Menjelajah</span>
-          <span className="bg-[#008781] text-white p-2.5 rounded-full group-hover:bg-[#006b66] transition">
-            <FaArrowRight size={14} />
-          </span>
-        </button>
-      </div>
-
-      {/* --- AREA PETA INTERAKTIF --- */}
-      <div className="relative w-full max-w-5xl mx-auto mt-4 px-4 flex justify-center items-center">
+      {/* --- KONTEN UTAMA INSIGHT --- */}
+      <main className="flex-1 w-full max-w-[960px] mx-auto pt-32 pb-24 px-6 flex flex-col gap-10">
         
-        {/* --- CHART MENTUL-MENTUL (UKURAN & POSISI RESPONSIVE) --- */}
-        
-        {/* 1. FLOATING BAR CHART (Kanan Atas) */}
-        {/* Di HP: ditarik ke atas (-top-8) biar menjauh dari peta. Di PC: top-10 */}
-        <div className="absolute -top-8 md:top-10 right-2 md:right-10 bg-white p-2 md:p-3 rounded-lg md:rounded-2xl shadow-xl z-20 animate-bounce" style={{ animationDuration: '3s' }}>
-          <div className="w-14 h-10 md:w-24 md:h-16 flex items-end justify-between gap-0.5 md:gap-1">
-            <div className="w-2 md:w-3 h-6 md:h-10 bg-blue-400 rounded-t-sm"></div>
-            <div className="w-2 md:w-3 h-8 md:h-14 bg-[#008781] rounded-t-sm"></div>
-            <div className="w-2 md:w-3 h-5 md:h-8 bg-yellow-400 rounded-t-sm"></div>
-            <div className="w-2 md:w-3 h-7 md:h-12 bg-purple-400 rounded-t-sm"></div>
-          </div>
-        </div>
-
-        {/* 2. FLOATING PIE CHART (Kiri Bawah) */}
-        {/* Di HP: ditarik ke bawah (-bottom-12) biar gak nutupin Sumatera. Di PC: bottom-10 */}
-        <div className="absolute -bottom-12 md:bottom-10 left-2 md:left-10 bg-white p-2 md:p-3 rounded-lg md:rounded-2xl shadow-xl z-20 animate-bounce" style={{ animationDuration: '4s' }}>
-           <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-[5px] md:border-8 border-t-red-500 border-r-blue-500 border-b-[#008781] border-l-yellow-500"></div>
-        </div>
-
-
-        {/* --- PETA SVG --- */}
-        <div className="w-full drop-shadow-2xl flex justify-center z-10">
+        {/* 1. PETA INTERAKTIF SVG */}
+        <div className="w-full drop-shadow-xl flex justify-center">
           <svg width="100%" height="auto" viewBox="0 0 960 345" fill="none" xmlns="http://www.w3.org/2000/svg" className="max-w-[900px]">
             <path className="hover:fill-[#008781] transition-colors duration-300 cursor-pointer" d="M45.9884 100.913L42.5328 97.236L45.0224 97.3867L46.2672 99.6109L45.9884 100.913ZM65.4871 58.8131L61.4639 59.7524L60.3884 65.0426L58.1477 66.0262L58.1776 67.5858L55.8573 69.5265L57.9983 72.6811L58.8946 75.7383L60.468 76.846L58.7552 79.2651L59.034 84.8301L62.0017 86.3542L61.5734 91.1837L62.2108 93.6294L63.8539 95.765L63.117 98.7779L58.8846 96.6423L57.2813 97.1385L54.7419 96.5714L52.7502 94.0814L52.6307 89.7481L51.5452 85.4858L47.8506 84.3338L45.5602 81.7818L44.4448 78.8309L42.5925 78.2727L39.1967 73.0267L36.9361 71.6178L36.5776 70.3949L34.6456 69.1898L29.8556 69.2606L26.3701 67.0187L24.1295 64.0236L22.078 62.0652L18.3834 60.2398L14.6091 56.5534L8.40498 51.6708L6.1444 48.6136L3.23651 43.5449L3.58506 42.4993L2.16099 40.47L2.64896 38.1838L1.9917 36.8103L3.22655 35.1266L5.8556 33.6113L9.79917 34.0101L12.7369 34.8342L15.8639 36.3672L16.3021 37.5724L19.678 40.1687L25.4539 41.5954L30.3336 41.8879L35.3328 40.5498L38.6888 40.7093L41.7461 41.4182L42.5826 42.7031L44.5145 42.712L49.8324 41.0992L52.2025 43.6956L56.6838 47.568L58.1477 47.8693L59.4025 51.4227L61.3145 54.0191L65.7361 56.4382L65.4871 58.8131ZM27.2266 95.2245L25.1353 95.0472L24.3884 93.7624L19.439 90.847L14.4199 89.4291L11.9801 87.3467L11.8705 86.3808L13.8224 84.1832L15.7643 84.5199L18.1245 87.1429L20.3054 87.6126L22.6556 89.8811L27.2066 92.2471L28.3021 94.7105L27.2266 95.2245Z" fill="#274338" stroke="#999999" strokeWidth={0.5}/>
             <path className="hover:fill-[#008781] transition-colors duration-300 cursor-pointer" d="M427.27 303.05L424.342 301.615L426.802 300.516L427.27 303.05ZM404.056 289.599L412.402 291.486L415.3 291.061L418.835 289.103L424.342 290.946L426.593 292.213L429.769 295.5L427.797 297.184L423.137 298.691L418.616 301.296L413.397 296.732L410.609 295.625L406.327 295.465L403.399 292.142L404.056 289.599Z" fill="white" stroke="#999999" strokeWidth={0.5}/>
@@ -95,9 +55,60 @@ const InsightSection = () => {
           </svg>
         </div>
 
-      </div>
-    </section>
+        {/* 2. KOTAK INFO HIJAU */}
+        <div className="bg-[#274338] text-white p-6 rounded-[12px] w-full md:w-[464px] shadow-sm">
+          <p className="font-teachers text-sm leading-relaxed text-gray-200">
+            Peta interaktif ini merangkum berbagai data kewilayahan dan profil penduduk secara kolektif. 
+            Detail informasi yang ditampilkan disesuaikan dengan ketersediaan data terbaru pada setiap titik koordinat provinsi.
+          </p>
+        </div>
+
+        {/* 3. DUA KARTU GRAFIK */}
+        <div className="flex flex-col md:flex-row justify-between gap-6 w-full mt-2">
+          
+          {/* --- KARTU KIRI (Jumlah Laki-laki dan Perempuan) --- */}
+          <div className="flex flex-col gap-3 w-full md:w-[464px]">
+            {/* Header Hijau */}
+            <div className="bg-[#274338] w-full h-[57px] rounded-[12px] flex items-center justify-center shadow-xl">
+              <h3 className="text-white font-teachers text-[22px]">Jumlah Laki-laki dan Perempuan</h3>
+            </div>
+            {/* Body Putih */}
+            <div className="bg-white w-full h-auto min-h-[456px] rounded-[20px] p-8 flex flex-col items-center justify-center shadow-xl">
+              {/* Pie Chart */}
+              <div className="w-[250px] h-[250px] bg-gray-100 rounded-full flex items-center justify-center mb-8 border border-dashed border-gray-300 text-gray-400 text-sm">
+                 <img src={pieChart} alt="Pie Chart" className="w-full h-full object-contain" />
+              </div>
+              <p className="font-teachers text-sm text-gray-700 leading-relaxed text-center">
+                Berdasarkan pada data BPS jumlah populasi Pria di seluruh pulau sumatra sebesar 65%, sedangkan untuk populasi Wanita sebanyak 35%
+              </p>
+            </div>
+          </div>
+
+          {/* --- KARTU KANAN (Jumlah Budaya) --- */}
+          <div className="flex flex-col gap-3 w-full md:w-[464px]">
+            {/* Header Hijau */}
+            <div className="bg-[#274338] w-full h-[57px] rounded-[12px] flex items-center justify-center shadow-xl">
+              <h3 className="text-white font-teachers text-[22px]">Jumlah Budaya</h3>
+            </div>
+            {/* Body Putih */}
+            <div className="bg-white w-full h-auto min-h-[456px] rounded-[20px] p-8 flex flex-col items-center justify-center shadow-xl">
+              {/* Bar Chart */}
+              <div className="w-[300px] h-[200px] bg-gray-100 flex items-center justify-center mb-10 border border-dashed border-gray-300 text-gray-400 text-sm">
+                 <img src={barChart} alt="Bar Chart" className="w-full h-full object-contain" />
+              </div>
+              <p className="font-teachers text-sm text-gray-700 leading-relaxed text-center">
+                Berdasarkan jumlah data dari BPS jumlah budaya yang ada di pulau sumatra adalah 150, dimana pulau Sumatra Barat 50% dan aceh 50%
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <FooterSection />
+    </div>
   );
 };
 
-export default InsightSection;
+export default InsightPage;

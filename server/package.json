@@ -1,0 +1,44 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend API service designed to manage database operations and provide seamless integration for Data Science models and AI features.",
+  "homepage": "https://github.com/Abudann/nusantaralens#readme",
+  "bugs": {
+    "url": "https://github.com/Abudann/nusantaralens/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abudann/nusantaralens.git"
+  },
+  "license": "ISC",
+  "author": "Gilang Mayong Saputra",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "migrate": "node-pg-migrate",
+    "start:dev": "nodemon ./src/server.js",
+    "seeder:hero": "node ./src/data/heroes/seeder.js",
+    "seeder:laguage": "node ./src/data/languages/seeder.js",
+    "seeder:culture": "node ./src/data/cultures/seeder.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "node-pg-migrate": "^8.0.4",
+    "pg": "^8.20.0",
+    "redis": "^5.12.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.2.1",
+    "eslint-config-dicodingacademy": "^0.9.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "nodemon": "^3.1.14"
+  }
+}

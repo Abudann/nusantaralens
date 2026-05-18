@@ -9,9 +9,11 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-  pgm.renameColumn('words', 'createdAt', 'created_at');
+  pgm.renameColumn('cultures', 'photoUrl', 'photo_url');
 
-  pgm.renameColumn('words', 'updatedAt', 'updated_at');
+  pgm.renameColumn('cultures', 'createdAt', 'created_at');
+
+  pgm.renameColumn('cultures', 'updatedAt', 'updated_at');
 };
 
 /**
@@ -21,7 +23,9 @@ export const up = (pgm) => {
  */
 
 export const down = (pgm) => {
-  pgm.renameColumn('words', 'created_at', 'createdAt');
+  pgm.renameColumn('cultures', 'photo_url', 'photoUrl');
 
-  pgm.renameColumn('words', 'updated_at', 'updatedAt');
+  pgm.renameColumn('cultures', 'created_at', 'createdAt');
+
+  pgm.renameColumn('cultures', 'updated_at', 'updatedAt');
 };

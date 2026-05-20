@@ -9,27 +9,15 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-  pgm.createTable('words', {
-    id: {
-      type: 'serial',
-      primaryKey: true,
-      notNull: true,
-    },
-    lemma: {
-      type: 'varchar(255)',
-      notNull: true,
-    },
-    createdAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-    updatedAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-  });
+  pgm.addConstraint('languages', 'unique_iso_code', 'UNIQUE(iso_code)');
+
+  pgm.addConstraint('words', 'unique_lemma', 'UNIQUE(lemma)');
+
+  pgm.addConstraint(
+    'translations',
+    'unique_translation',
+    'UNIQUE(language_id, word_id, translation)',
+  );
 };
 
 /**
@@ -37,7 +25,10 @@ export const up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-
 export const down = (pgm) => {
-  pgm.dropTable('words');
+  pgm.dropConstraint('languages', 'unique_iso_code');
+
+  pgm.dropConstraint('words', 'unique_lemma');
+
+  pgm.dropConstraint('translations', 'unique_translation');
 };

@@ -15,7 +15,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:5000/",
+            "url": "https://localhost:5000/",
             "description": "Development Server"
         }
     ],
@@ -25,109 +25,152 @@
                 "tags": [
                     "Heroes"
                 ],
-                "summary": "Get all heroes",
-                "description": "Retrieve all heroes data successfully.",
+                "summary": "Get All National Heroes Data",
+                "description": "Retrieve a complete list of Indonesian national heroes...",
                 "responses": {
                     "200": {
-                        "description": "Heroes data retrieved successfully",
+                        "description": "Successfully retrieved hero data.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HeroesResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/culture": {
-            "get": {
-                "tags": [
-                    "Cultures"
-                ],
-                "summary": "Get all cultures",
-                "description": "Retrieve all cultures data successfully.",
-                "responses": {
-                    "200": {
-                        "description": "Cultures data retrieved successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CulturesResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/language/{iso_code}/words": {
-            "get": {
-                "tags": [
-                    "Languages"
-                ],
-                "summary": "Get words by language iso code",
-                "description": "Retrieve language words based on iso code.",
-                "parameters": [
-                    {
-                        "name": "iso_code",
-                        "in": "path",
-                        "required": true,
-                        "description": "ISO code of regional language",
-                        "schema": {
-                            "type": "string",
-                            "example": "ace"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Language words retrieved successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/WordsResponse"
+                                    "$ref": "#/components/schemas/HeroResponse"
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "Language not found",
+                        "description": "Heroes not found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/FailedResponse"
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "failed",
+                                    "message": "Heroes not found"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "Internal server error",
+                        "description": "Internal Server Error",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "error",
+                                    "message": "findAllHeroes is not defined"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cultures": {
+            "get": {
+                "tags": [
+                    "Cultures"
+                ],
+                "summary": "Get All Indonesian Cultural Heritage Data",
+                "description": "Retrieve a complete list of Indonesian cultures...",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved cultures data.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CultureResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "cultures not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "failed",
+                                    "message": "cultures not found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Insernal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "error",
+                                    "message": "findAllCultures is not defined"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/language/{isoCode}/words": {
+            "get": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Get a list of words based on the language (ISO) code.",
+                "description": "Retrieve a list of regional vocabulary along with their Indonesian translations using the specified language ISO code.",
+                "parameters": [
+                    {
+                        "name": "isoCode",
+                        "in": "path",
+                        "required": true,
+                        "description": "Regional language ISO code (example: ace, jav, abui)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved language data.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LanguageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Language is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "failed",
+                                    "message": "Language not found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Insernal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "status": "error",
+                                    "message": "fidLanguageByIsoCode is not defined"
                                 }
                             }
                         }
@@ -147,48 +190,71 @@
                     },
                     "name": {
                         "type": "string",
-                        "example": "Ir. Soekarno"
+                        "example": "Raden Dewi Sartika"
                     },
-                    "ascencion_document_number": {
+                    "ascencionDocumentNumber": {
                         "type": "string",
-                        "example": "83/TK/TAHUN 2012"
+                        "example": "No Sk 252 Tahun 1966"
                     },
-                    "ascencion_document_date": {
+                    "ascencionDocumentDate": {
                         "type": "string",
-                        "example": "07 November 2012"
+                        "example": "07 Oktober 1966"
                     },
-                    "ascencion_year": {
+                    "ascencionYear": {
                         "type": "integer",
-                        "example": 2012
+                        "example": 1966
                     },
-                    "photo_url": {
+                    "photoUrl": {
                         "type": "string",
-                        "format": "uri",
-                        "example": "https://example.com/photo.webp"
+                        "example": "https://res.cloudinary.com/..."
                     },
-                    "birth_date": {
+                    "birthDate": {
                         "type": "string",
-                        "example": "06 Juni 1901"
+                        "example": "4 Desember 1884"
                     },
-                    "birth_place": {
+                    "birthPlace": {
                         "type": "string",
-                        "example": "Surabaya, Jawa Timur"
+                        "example": "Cicalengka, Bandung"
                     },
-                    "death_date": {
+                    "deathDate": {
                         "type": "string",
-                        "example": "21 Juni 1970"
+                        "example": "11 September 1947"
                     },
-                    "death_place": {
+                    "deathPlace": {
                         "type": "string",
-                        "example": "Jakarta"
+                        "example": "Tasikmalaya"
                     },
-                    "burial_place": {
+                    "burialPlace": {
                         "type": "string",
-                        "example": "Makam Bung Karno, Blitar, Jawa Timur"
+                        "example": "Astana Anyar, Bandung"
                     },
                     "description": {
                         "type": "string",
-                        "example": "Proklamator Kemerdekaan Indonesia dan Presiden pertama Republik Indonesia yang merumuskan Pancasila sebagai dasar negara."
+                        "example": "Tokoh perintis pendidikan untuk kaum wanita..."
+                    }
+                }
+            },
+            "HeroResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "success"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Heroes data retrieved successfully"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "heroes": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Hero"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -203,14 +269,37 @@
                         "type": "string",
                         "example": "Wayang Kulit"
                     },
-                    "photo_url": {
+                    "photoUrl": {
                         "type": "string",
-                        "format": "uri",
-                        "example": "https://example.com/culture.webp"
+                        "example": "https://res.cloudinary.com/..."
                     },
                     "description": {
                         "type": "string",
-                        "example": "Wayang Kulit adalah seni pertunjukan tradisional."
+                        "example": "Wayang Kulit adalah seni pertunjukan tradisional..."
+                    }
+                }
+            },
+            "CultureResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "success"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Cultures data retrieved successfully"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "cultures": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Culture"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -227,40 +316,7 @@
                     }
                 }
             },
-            "HeroesData": {
-                "type": "object",
-                "properties": {
-                    "heroes": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Hero"
-                        }
-                    }
-                }
-            },
-            "CulturesData": {
-                "type": "object",
-                "properties": {
-                    "cultures": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Culture"
-                        }
-                    }
-                }
-            },
-            "WordsData": {
-                "type": "object",
-                "properties": {
-                    "words": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Word"
-                        }
-                    }
-                }
-            },
-            "HeroesResponse": {
+            "LanguageResponse": {
                 "type": "object",
                 "properties": {
                     "status": {
@@ -269,42 +325,18 @@
                     },
                     "message": {
                         "type": "string",
-                        "example": "Heroes data retrieved successfully"
+                        "example": "Get Aceh language successfully"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/HeroesData"
-                    }
-                }
-            },
-            "CulturesResponse": {
-                "type": "object",
-                "properties": {
-                    "status": {
-                        "type": "string",
-                        "example": "success"
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Cultures data retrieved successfully"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/CulturesData"
-                    }
-                }
-            },
-            "WordsResponse": {
-                "type": "object",
-                "properties": {
-                    "status": {
-                        "type": "string",
-                        "example": "success"
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Words data retrieved successfully"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/WordsData"
+                        "type": "object",
+                        "properties": {
+                            "words": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Word"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -313,24 +345,12 @@
                 "properties": {
                     "status": {
                         "type": "string",
-                        "example": "error"
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Internal server error"
-                    }
-                }
-            },
-            "FailedResponse": {
-                "type": "object",
-                "properties": {
-                    "status": {
-                        "type": "string",
+                        "description": "Contains `failed` for client errors (4xx) or `error` for server errors (5xx).",
                         "example": "failed"
                     },
                     "message": {
                         "type": "string",
-                        "example": "Resource not found"
+                        "example": "Heroes not found"
                     }
                 }
             }

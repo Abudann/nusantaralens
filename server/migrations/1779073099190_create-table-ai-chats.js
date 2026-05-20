@@ -32,7 +32,7 @@ export const up = (pgm) => {
 
     image_url: {
       type: 'TEXT',
-      notNull: false,
+      notNull:false
     },
 
     created_at: {

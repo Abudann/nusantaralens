@@ -9,27 +9,9 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-  pgm.createTable('words', {
-    id: {
-      type: 'serial',
-      primaryKey: true,
-      notNull: true,
-    },
-    lemma: {
-      type: 'varchar(255)',
-      notNull: true,
-    },
-    createdAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-    updatedAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-  });
+  pgm.renameColumn('words', 'createdAt', 'created_at');
+
+  pgm.renameColumn('words', 'updatedAt', 'updated_at');
 };
 
 /**
@@ -39,5 +21,7 @@ export const up = (pgm) => {
  */
 
 export const down = (pgm) => {
-  pgm.dropTable('words');
+  pgm.renameColumn('words', 'created_at', 'createdAt');
+
+  pgm.renameColumn('words', 'updated_at', 'updatedAt');
 };

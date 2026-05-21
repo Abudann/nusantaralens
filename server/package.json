@@ -20,11 +20,12 @@
     "migrate": "node-pg-migrate",
     "start:dev": "nodemon ./src/server.js",
     "seeder:hero": "node ./src/data/heroes/seeder.js",
-    "seeder:laguage": "node ./src/data/languages/seeder.js",
+    "seeder:language": "node ./src/data/languages/seeder.js",
     "seeder:culture": "node ./src/data/cultures/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "cloudinary": "^2.10.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

@@ -2,12 +2,14 @@ import pool from '../config/database.config.js';
 
 export const findAllCultures = async () => {
   const query = {
-    text: `SELECT
+    text: `
+      SELECT
         id,
         name,
-        "photoUrl",
+        photo_url,
         description
-        FROM cultures`,
+      FROM cultures
+    `,
   };
 
   const result = await pool.query(query);

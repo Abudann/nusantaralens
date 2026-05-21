@@ -4,18 +4,18 @@ export const findAllHeroes = async () => {
   const query = {
     text: `
     SELECT 
-      "id", 
-      "name", 
-      "ascencionDocumentNumber", 
-      "ascencionDocumentDate", 
-      "ascencionYear", 
-      "photoUrl", 
-      "birthDate", 
-      "birthPlace", 
-      "deathDate", 
-      "deathPlace", 
-      "burialPlace", 
-      "description"
+      id,
+      name,
+      ascencion_document_number,
+      ascencion_document_date,
+      ascencion_year,
+      photo_url,
+      birth_date,
+      birth_place,
+      death_date,
+      death_place,
+      burial_place,
+      description
     FROM heroes;
 `,
   };

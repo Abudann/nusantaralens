@@ -5,7 +5,7 @@ export const getAllCultures = async (req, res, next) => {
     const cultures = await fecthCultures();
 
     res.status(200).json({
-      tatus: 'success',
+      status: 'success',
       message: 'Cultures data retrieved successfully',
       data: {
         cultures: cultures,

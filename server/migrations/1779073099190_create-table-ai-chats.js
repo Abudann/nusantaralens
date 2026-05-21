@@ -9,27 +9,39 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-  pgm.createTable('words', {
+  pgm.createTable('ai-chats', {
     id: {
-      type: 'serial',
+      type: 'SERIAL',
       primaryKey: true,
+    },
+
+    session_id: {
+      type: 'VARCHAR(255)',
       notNull: true,
     },
-    lemma: {
-      type: 'varchar(255)',
+
+    user_query: {
+      type: 'TEXT',
       notNull: true,
     },
-    createdAt: {
-      type: 'timestamp',
+
+    ai_response: {
+      type: 'TEXT',
       notNull: true,
-      default: pgm.func('current_timestamp'),
     },
-    updatedAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
+
+    image_url: {
+      type: 'TEXT',
+      notNull: false,
+    },
+
+    created_at: {
+      type: 'TIMESTAMP',
+      default: pgm.func('CURRENT_TIMESTAMP'),
     },
   });
+
+  pgm.createIndex('ai-chats', 'session_id');
 };
 
 /**
@@ -37,7 +49,6 @@ export const up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-
 export const down = (pgm) => {
-  pgm.dropTable('words');
+  pgm.dropTable('ai-chats');
 };

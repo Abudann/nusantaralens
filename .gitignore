@@ -25,5 +25,7 @@ dist-ssr
 
 # ---- Back End ----
 .env
+.env.*
+!.env.example
 .prettierrc
 data

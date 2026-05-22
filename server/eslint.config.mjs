@@ -17,6 +17,7 @@ export default [
         },
       ],
       quotes: ['error', 'single'],
+      camelcase: 'off',
     },
   },
   prettierConfig,

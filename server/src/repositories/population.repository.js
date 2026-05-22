@@ -45,3 +45,15 @@ export const upsertPopulation = async ({
   const result = await pool.query(query);
   return result.rows;
 };
+
+export const findIslandById = async (islandId) => {
+  const query = {
+    text: `
+      SELECT * FROM populations WHERE id = $1
+      `,
+    values: [islandId],
+  };
+
+  const result = await pool.query(query);
+  return result.rows[0];
+};

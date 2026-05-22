@@ -1,7 +1,11 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { upsertPopulation } from '../repositories/population.repository.js';
+import {
+  upsertPopulation,
+  findIslandById,
+} from '../repositories/population.repository.js';
+import redisClient from '../config/redis.config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -59,7 +63,7 @@ export const syncPopulationData = async () => {
         );
       }
 
-      totalSynced++
+      totalSynced++;
     }
   }
   const syncData = Object.values(syncedDataMap);
@@ -68,4 +72,21 @@ export const syncPopulationData = async () => {
     totalSynced,
     data: syncData,
   };
+};
+
+export const fetchIslandById = async (islandId) => {
+  const CACHE_KEY = `indonesian:island:${islandId}`;
+
+  const cachedData = await redisClient.get(CACHE_KEY);
+  if (cachedData) return JSON.parse(cachedData);
+
+  const island = await findIslandById(islandId);
+  if (!island || island.length === 0) {
+    const error = new Error('Island not found');
+    error.status = 404;
+    throw error;
+  }
+
+  await redisClient.setEx(CACHE_KEY, 3600, JSON.stringify(island));
+  return island;
 };

@@ -1,9 +1,20 @@
 import { createClient } from 'redis';
 
-const redisClient = createClient({
-  url: process.env.REDIS_HOST,
+const isProduction = process.env.NODE_ENV === 'production';
+const redisClient = isProduction
+  ? createClient({
+      url: process.env.REDIS_URL,
+    })
+  : createClient({
+      socket: {
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT,
+      },
+    });
+
+redisClient.on('error', (err) => {
+  console.error('Redis Error:', err);
 });
-redisClient.on('error', (err) => console.error('Redis Error', err));
 
 await redisClient.connect();
 

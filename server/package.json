@@ -19,6 +19,7 @@
     "lint:fix": "eslint . --fix",
     "migrate:create": "node-pg-migrate create",
     "migrate:up": "node-pg-migrate up",
+    "migrate:up:prod": "dotenv -e .env.production node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
     "start": "cross-env NODE_ENV=production node ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
@@ -44,6 +45,7 @@
     "uuid": "^14.0.0"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.2.1",
     "eslint-config-dicodingacademy": "^0.9.5",
     "eslint-config-prettier": "^10.1.8",

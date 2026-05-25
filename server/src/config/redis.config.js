@@ -1,6 +1,7 @@
 import { createClient } from 'redis';
 
 const isProduction = process.env.NODE_ENV === 'production';
+console.log(isProduction);
 const redisClient = isProduction
   ? createClient({
       url: process.env.REDIS_URL,

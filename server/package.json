@@ -19,6 +19,7 @@
     "lint:fix": "eslint . --fix",
     "migrate:create": "node-pg-migrate create",
     "migrate:up": "node-pg-migrate up",
+    "migrate:up:prod": "dotenv -e .env.production node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
     "start": "cross-env NODE_ENV=production node ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
@@ -28,18 +29,23 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
+    "@google/genai": "^2.6.0",
+    "axios": "^1.16.1",
     "cloudinary": "^2.10.0",
     "cors": "^2.8.6",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "form-data": "^4.0.5",
+    "joi": "^18.2.1",
     "multer": "^2.1.1",
     "node-pg-migrate": "^8.0.4",
     "pg": "^8.20.0",
-    "redis": "^5.12.1"
+    "redis": "^5.12.1",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.2.1",
     "eslint-config-dicodingacademy": "^0.9.5",
     "eslint-config-prettier": "^10.1.8",

@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server Is Running on http://${HOST}:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server Is Running on http://${HOST}:${PORT}`);
+  });
+}
+
+export default app;

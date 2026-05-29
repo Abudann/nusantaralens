@@ -1,0 +1,62 @@
+[
+    {
+        "provinsi":"Aceh",
+        "laki_laki":2825512,
+        "perempuan":2800448,
+        "total_keseluruhan":5625960
+    },
+    {
+        "provinsi":"Sumatera Utara",
+        "laki_laki":7862993,
+        "perempuan":7922846,
+        "total_keseluruhan":15785839
+    },
+    {
+        "provinsi":"Sumatera Barat",
+        "laki_laki":2979710,
+        "perempuan":2934590,
+        "total_keseluruhan":5914300
+    },
+    {
+        "provinsi":"Riau",
+        "laki_laki":3476706,
+        "perempuan":3334452,
+        "total_keseluruhan":6811158
+    },
+    {
+        "provinsi":"Jambi",
+        "laki_laki":1914250,
+        "perempuan":1854230,
+        "total_keseluruhan":3768480
+    },
+    {
+        "provinsi":"Sumatera Selatan",
+        "laki_laki":4542623,
+        "perempuan":4385892,
+        "total_keseluruhan":8928515
+    },
+    {
+        "provinsi":"Bengkulu",
+        "laki_laki":1091256,
+        "perempuan":1046788,
+        "total_keseluruhan":2138044
+    },
+    {
+        "provinsi":"Lampung",
+        "laki_laki":4857470,
+        "perempuan":4665440,
+        "total_keseluruhan":9522910
+    },
+    {
+        "provinsi":"Kepulauan Bangka Belitung",
+        "laki_laki":795930,
+        "perempuan":756450,
+        "total_keseluruhan":1552380
+    },
+    {
+        "provinsi":"Kepulauan Riau",
+        "laki_laki":1322950,
+        "perempuan":1271410,
+        "total_keseluruhan":2594360
+    }
+]

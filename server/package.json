@@ -21,11 +21,16 @@
     "migrate:up": "node-pg-migrate up",
     "migrate:up:prod": "dotenv -e .env.production node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
-    "start": "cross-env NODE_ENV=production node ./src/server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
-    "seeder:hero": "node ./src/data/heroes/seeder.js",
-    "seeder:language": "node ./src/data/languages/seeder.js",
-    "seeder:culture": "node ./src/data/cultures/seeder.js",
+    "seed:heroes:dev": "node ./src/data/heroes/seeder-hero.js",
+    "seed:languages:dev": "node ./src/data/languages/seeder-language.js",
+    "seed:cultures:dev": "node ./src/data/cultures/seeder-culture.js",
+    "seed:populations:dev": "node ./src/data/populations/seeder-population.js",
+    "seed:heroes:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/heroes/seeder-hero.js",
+    "seed:languages:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/languages/seeder-language.js",
+    "seed:cultures:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/cultures/seeder-culture.js",
+    "seed:populations:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/populations/seeder-population.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -33,7 +38,6 @@
     "axios": "^1.16.1",
     "cloudinary": "^2.10.0",
     "cors": "^2.8.6",
-    "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "form-data": "^4.0.5",
@@ -46,6 +50,7 @@
     "uuid": "^14.0.0"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
     "eslint": "^10.2.1",
     "eslint-config-dicodingacademy": "^0.9.5",

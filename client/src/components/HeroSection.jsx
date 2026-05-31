@@ -1,10 +1,13 @@
 import { FaArrowRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import wayangKiri from '../assets/hero/wayang-kiri.png';
 import wayangKanan from '../assets/hero/wayang-kanan.png';
 import gunungan from '../assets/hero/gunungan-jawa.png';
-import awanCluster from '../assets/hero/awan-cluster.svg';    
+import awanCluster from '../assets/hero/awan-cluster.svg';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full h-screen bg-bianca-50 flex flex-col items-center justify-start md:justify-center overflow-hidden px-4 sm:px-6 pt-28 sm:pt-40 md:pt-0">
       
@@ -43,8 +46,8 @@ const HeroSection = () => {
           Jelajahi warisan agung Nusantara yang mendunia dalam satu platform terpadu.
         </p>
 
-        {/* TOMBOL (Sudah Oke, ga perlu diubah) */}
-        <button data-aos="zoom-in" data-aos-delay="400" className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group">
+        {/* TOMBOL */}
+        <button data-aos="zoom-in" data-aos-delay="400" onClick={() => navigate('/insights')} className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group">
           <span className="text-sm">Mulai Menjelajah</span>
           <span className="bg-inv-base text-white p-2.5 rounded-full group-hover:bg-roman-coffee-800 transition">
             <FaArrowRight size={14} />

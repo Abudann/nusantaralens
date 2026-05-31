@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom'; // 1. IMPORT useNavigate
 
 // --- GAMBAR BACKGROUND ---
 import bgCulture from '../assets/preview/bg-candi.png'; 
@@ -14,10 +15,9 @@ import imgKomunikasi from '../assets/preview/card-komunikasi.png';
 const PreviewSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef(null);
-  
-  // WASIT: Untuk mencegah bentrok antara klik tombol dan event scroll
+  const navigate = useNavigate();
   const isAutoScrolling = useRef(false);
-  
+
   const carouselData = [
     {
       id: 1,
@@ -27,7 +27,8 @@ const PreviewSection = () => {
       cardImg: imgBatik,
       cardTitleFront: "Batik",
       cardTitleBack: "Batik Nusantara",
-      cardDescBack: "Karya seni ikonik warisan leluhur yang diakui dunia."
+      cardDescBack: "Karya seni ikonik warisan leluhur yang diakui dunia.",
+      route: "/explore/budaya"
     },
     {
       id: 2,
@@ -37,7 +38,8 @@ const PreviewSection = () => {
       cardImg: imgSoedirman,
       cardTitleFront: "Jendral Soedirman",
       cardTitleBack: "Sang Panglima",
-      cardDescBack: "Tokoh pahlawan nasional yang pantang menyerah."
+      cardDescBack: "Tokoh pahlawan nasional yang pantang menyerah.",
+      route: "/explore/pahlawan"
     },
     {
       id: 3,
@@ -47,7 +49,8 @@ const PreviewSection = () => {
       cardImg: imgKomunikasi,
       cardTitleFront: "Komunikasi",
       cardTitleBack: "Bahasa & Sastra",
-      cardDescBack: "Ragam bahasa daerah penunjang persatuan bangsa."
+      cardDescBack: "Ragam bahasa daerah penunjang persatuan bangsa.",
+      route: "/explore/bahasa"
     }
   ];
 
@@ -77,7 +80,6 @@ const PreviewSection = () => {
   // Sync scroll manual di HP
   useEffect(() => {
     const handleScroll = () => {
-      // Jika sedang animasi klik tombol, abaikan event scroll ini agar tidak bentrok (DOUBLE CLICK FIX)
       if (isAutoScrolling.current) return; 
 
       if (scrollContainerRef.current) {
@@ -132,7 +134,7 @@ const PreviewSection = () => {
       {/* 2. KONTEN UTAMA */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-0 md:px-16 flex flex-col md:flex-row items-center justify-between h-full gap-8 md:gap-0 mt-8 md:mt-0 pb-10 md:pb-0">
         
-        {/* KIRI: TEKS (GLITCH FIX) */}
+        {/* KIRI: TEKS */}
         <div className="w-full md:w-5/12 text-white flex flex-col items-start px-6 md:px-0 order-2 md:order-1 relative z-30">
           <h2 data-aos="fade-right" className="text-4xl md:text-[80px] font-base font-bold mb-4 drop-shadow-md leading-tight">
             {carouselData[activeIndex].title}
@@ -140,7 +142,13 @@ const PreviewSection = () => {
           <p data-aos="fade-in" data-aos-delay="200" className="text-sm md:text-lg font-teachers leading-relaxed mb-6 md:mb-8 text-gray-200 min-h-[100px] md:min-h-[120px]">
              {carouselData[activeIndex].desc}
           </p>
-          <button data-aos="fade-up" className="flex items-center justify-between bg-white text-inv-base w-[170px] md:w-[190px] h-[45px] md:h-[55px] rounded-full pl-5 pr-1.5 md:pl-6 md:pr-2 font-bold font-teachers hover:bg-gray-100 transition shadow-lg group">
+          
+          {/* 4. EKSEKUSI KLIK TOMBOL DINAMIS */}
+          <button 
+            onClick={() => navigate(carouselData[activeIndex].route)} 
+            data-aos="fade-up" 
+            className="flex items-center justify-between bg-white text-inv-base w-[170px] md:w-[190px] h-[45px] md:h-[55px] rounded-full pl-5 pr-1.5 md:pl-6 md:pr-2 font-bold font-teachers hover:bg-gray-100 transition shadow-lg group"
+          >
             <span className="text-xs md:text-sm">Mulai Menjelajah</span>
             <span className="bg-inv-base text-white p-2 md:p-2.5 rounded-full group-hover:bg-roman-coffee-800 transition">
               <FaArrowRight size={12} className="md:text-sm" />
@@ -165,10 +173,8 @@ const PreviewSection = () => {
               `}
               onClick={() => scrollToCard(index)}
             >
-              {/* 3D FLIP KARTU */}
               <div className="relative w-full h-full transition-transform duration-700 ease-in-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] rounded-3xl will-change-transform bg-black/50 shadow-2xl">
                 
-                {/* SISI DEPAN */}
                 <div className="absolute inset-[1px] w-full h-full rounded-3xl overflow-hidden [backface-visibility:hidden] [transform:translateZ(1px)] bg-black">
                   <img src={card.cardImg} alt={card.cardTitleFront} className="absolute inset-0 w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
@@ -179,7 +185,6 @@ const PreviewSection = () => {
                   </h3>
                 </div>
 
-                {/* SISI BELAKANG */}
                 <div className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-menu-bg/95 backdrop-blur-md p-5 md:p-6 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [transform:rotateY(180deg)] border border-white/20 z-20">
                    <h3 className="text-white font-bold font-base text-lg md:text-2xl mb-2 md:mb-3">{card.cardTitleBack}</h3>
                    <p className="text-sm md:text-base font-teachers text-gray-200">{card.cardDescBack}</p>
@@ -188,8 +193,6 @@ const PreviewSection = () => {
               </div>
             </div>
           ))}
-
-          {/* Spacer siluman agar kartu terakhir punya ruang untuk geser ke tengah di HP */}
           <div className="w-[30vw] md:hidden flex-shrink-0" aria-hidden="true"></div>
         </div>
       </div>

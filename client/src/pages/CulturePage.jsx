@@ -6,7 +6,6 @@ const CulturePage = () => {
   return (
     <div className="w-full min-h-screen flex flex-col bg-bianca-50">
       
-      {/* Bungkus Navbar dengan background cokelat terang */}
       <div className="bg-[#9E7D5C] shadow-md">
         <NavbarSection isAbsoluteBg={true} />
       </div>

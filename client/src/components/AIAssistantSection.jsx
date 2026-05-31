@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
 import { FaPaperclip, FaArrowRight, FaXmark } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import barong from '../assets/ai/reog-bali.png';
 
 const AIAssistantSection = () => {
+  const navigate = useNavigate();
   // State untuk menyimpan file yang diupload
   const [selectedFile, setSelectedFile] = useState(null);
   const [promptText, setPromptText] = useState("");
@@ -82,7 +84,7 @@ const AIAssistantSection = () => {
           Cukup tanyakan atau unggah foto untuk mendapatkan penjelasan yang relevan.
         </p>
 
-        <button data-aos="fade-up" data-aos-delay="400" className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group mb-16 relative z-30">
+        <button data-aos="fade-up" data-aos-delay="400" onClick={() => navigate('/ai-assistant')} className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group mb-16 relative z-30">
           <span className="text-sm">Mulai Menjelajah</span>
           <span className="bg-inv-base text-white p-2.5 rounded-full group-hover:bg-roman-coffee-800 transition">
             <FaArrowRight size={14} />

@@ -21,11 +21,12 @@
     "migrate:up": "node-pg-migrate up",
     "migrate:up:prod": "dotenv -e .env.production node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
-    "start": "cross-env NODE_ENV=production node ./src/server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
     "seeder:hero": "node ./src/data/heroes/seeder.js",
     "seeder:language": "node ./src/data/languages/seeder.js",
     "seeder:culture": "node ./src/data/cultures/seeder.js",
+    "seeder:population": "node ./src/data/populations/sync-population.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

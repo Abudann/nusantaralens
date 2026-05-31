@@ -23,10 +23,14 @@
     "migrate:down": "node-pg-migrate down",
     "start:prod": "cross-env NODE_ENV=production nodemon ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
-    "seeder:hero": "node ./src/data/heroes/seeder.js",
-    "seeder:language": "node ./src/data/languages/seeder.js",
-    "seeder:culture": "node ./src/data/cultures/seeder.js",
-    "seeder:population": "node ./src/data/populations/sync-population.js",
+    "seed:heroes:dev": "node ./src/data/heroes/seeder-hero.js",
+    "seed:languages:dev": "node ./src/data/languages/seeder-language.js",
+    "seed:cultures:dev": "node ./src/data/cultures/seeder-culture.js",
+    "seed:populations:dev": "node ./src/data/populations/seeder-population.js",
+    "seed:heroes:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/heroes/seeder-hero.js",
+    "seed:languages:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/languages/seeder-language.js",
+    "seed:cultures:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/cultures/seeder-culture.js",
+    "seed:populations:prod": "dotenv -e .env.production cross-env NODE_ENV=production node ./src/data/populations/seeder-population.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

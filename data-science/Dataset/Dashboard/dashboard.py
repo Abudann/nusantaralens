@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 st.set_page_config(page_title = 'Dashboard NusantaraLens', page_icon= 'ID', layout ='wide')
 
@@ -22,9 +23,13 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-    df_penduduk = pd.read_csv('data_penduduk_indonesia.csv')
-    df_luas_wilayah = pd.read_csv('luas_wilayah_per_pulau.csv')
-    df_pertumbuhan = pd.read_csv('pertumbuhan_ekonomi_per_pulau.csv')
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    path_penduduk = os.path.join(base_dir, 'data_penduduk_indonesia.csv')
+    path_luas = os.path.join(base_dir, 'luas_wilayah_per_pulau.csv')
+    path_ekonomi = os.path.join(base_dir, 'pertumbuhan_ekonomi_per_pulau.csv')
+    df_penduduk = pd.read_csv(path_penduduk)
+    df_luas_wilayah = pd.read_csv(path_luas)
+    df_pertumbuhan = pd.read_csv(path_ekonomi)
 
     if df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'].dtype == 'object':
         df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'] = df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'].str.replace(',', '.').astype(float)

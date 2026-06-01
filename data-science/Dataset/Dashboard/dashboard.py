@@ -31,8 +31,7 @@ def load_data():
     df_luas_wilayah = pd.read_csv(path_luas)
     df_pertumbuhan = pd.read_csv(path_ekonomi)
 
-    if df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'].dtype == 'object':
-        df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'] = df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'].str.replace(',', '.').astype(float)
+   df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'] = df_pertumbuhan['Laju_Pertumbuhan_Ekonomi'].astype(str).str.replace(',', '.').astype(float)
 
     return df_penduduk, df_luas_wilayah, df_pertumbuhan
 df_penduduk, df_luas_wilayah, df_pertumbuhan = load_data()

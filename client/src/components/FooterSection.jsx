@@ -50,10 +50,13 @@ const FooterSection = () => {
                 <Link to="/ai-assistant">AI Assistant</Link>
               </li>
               <li className="hover:text-white hover:translate-x-2 transition-all duration-300 w-fit">
-                <Link to="/insights">Insights</Link>
+                <Link to="/insights">Insights Peta</Link>
               </li>
               <li className="hover:text-white hover:translate-x-2 transition-all duration-300 w-fit">
-                <Link to="/explore">Explore</Link>
+                <Link to="/explore/budaya">- Eksplor Budaya</Link>
+              </li>
+              <li className="hover:text-white hover:translate-x-2 transition-all duration-300 w-fit">
+                <Link to="/explore/pahlawan">- Eksplor Pahlawan</Link>
               </li>
             </ul>
           </div>

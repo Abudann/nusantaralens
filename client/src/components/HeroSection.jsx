@@ -1,10 +1,13 @@
 import { FaArrowRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import wayangKiri from '../assets/hero/wayang-kiri.png';
 import wayangKanan from '../assets/hero/wayang-kanan.png';
 import gunungan from '../assets/hero/gunungan-jawa.png';
-import awanCluster from '../assets/hero/awan-cluster.svg';    
+import awanCluster from '../assets/hero/awan-cluster.svg';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full h-screen bg-bianca-50 flex flex-col items-center justify-start md:justify-center overflow-hidden px-4 sm:px-6 pt-28 sm:pt-40 md:pt-0">
       
@@ -34,7 +37,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mt-0 md:mt-0">
         <img src={gunungan} alt="Gunungan" className="w-12 sm:w-16 md:w-24 mb-4 md:mb-6 transition-all duration-300" />
 
-        <h1 data-aos="fade-down" className="text-3xl sm:text-4xl md:text-[72px] font-base text-swirl-600 mb-4 md:mb-6 drop-shadow-md leading-[1.2] xs:leading-tight md:leading-[1.15] font-bold transition-all duration-300 max-w-[300px] xs:max-w-[400px] md:max-w-none">
+        <h1 data-aos="fade-down" className="text-4xl sm:text-5xl md:text-[72px] font-base text-swirl-600 mb-4 md:mb-6 drop-shadow-md leading-[1.2] xs:leading-tight md:leading-[1.15] font-bold transition-all duration-300 max-w-[300px] xs:max-w-[400px] md:max-w-none">
           Jelajahi Kekayaan <br /> Budaya Indonesia
         </h1>
         
@@ -43,8 +46,8 @@ const HeroSection = () => {
           Jelajahi warisan agung Nusantara yang mendunia dalam satu platform terpadu.
         </p>
 
-        {/* TOMBOL (Sudah Oke, ga perlu diubah) */}
-        <button data-aos="zoom-in" data-aos-delay="400" className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group">
+        {/* TOMBOL */}
+        <button data-aos="zoom-in" data-aos-delay="400" onClick={() => navigate('/insights')} className="flex items-center justify-between bg-white text-inv-base w-[190px] h-[55px] rounded-full pl-6 pr-2 font-bold font-teachers hover:bg-gray-50 transition shadow-lg border border-gray-200 group">
           <span className="text-sm">Mulai Menjelajah</span>
           <span className="bg-inv-base text-white p-2.5 rounded-full group-hover:bg-roman-coffee-800 transition">
             <FaArrowRight size={14} />

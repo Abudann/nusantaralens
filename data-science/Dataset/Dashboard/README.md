@@ -18,3 +18,6 @@ Dashboard ini dibangun dengan pustaka `Streamlit` untuk antarmuka pengguna dan `
 ```
 streamlit run dashboard.py
 ```
+
+## Tautan Streamlit Cloud
+https://dashboard-cp.streamlit.app/

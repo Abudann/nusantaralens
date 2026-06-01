@@ -37,7 +37,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mt-0 md:mt-0">
         <img src={gunungan} alt="Gunungan" className="w-12 sm:w-16 md:w-24 mb-4 md:mb-6 transition-all duration-300" />
 
-        <h1 data-aos="fade-down" className="text-3xl sm:text-4xl md:text-[72px] font-base text-swirl-600 mb-4 md:mb-6 drop-shadow-md leading-[1.2] xs:leading-tight md:leading-[1.15] font-bold transition-all duration-300 max-w-[300px] xs:max-w-[400px] md:max-w-none">
+        <h1 data-aos="fade-down" className="text-4xl sm:text-5xl md:text-[72px] font-base text-swirl-600 mb-4 md:mb-6 drop-shadow-md leading-[1.2] xs:leading-tight md:leading-[1.15] font-bold transition-all duration-300 max-w-[300px] xs:max-w-[400px] md:max-w-none">
           Jelajahi Kekayaan <br /> Budaya Indonesia
         </h1>
         

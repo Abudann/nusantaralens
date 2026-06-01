@@ -7,16 +7,13 @@ import MapIndonesia from '../components/MapIndonesia';
 const InsightPage = () => {
   const location = useLocation();
 
-  // 1. SCROLL KE ATAS OTOMATIS SAAT HALAMAN DIBUKA
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // 2. TANGKAP PULAU DARI HOME (Jika ada), kalau tidak ada default-nya Sumatera
   const initialIsland = location.state?.selectedIsland || 'Pulau_Sumatera';
   const [activeIsland, setActiveIsland] = useState(initialIsland);
 
-  // 3. DATABASE DUMMY LENGKAP DENGAN PERSENTASE MATEMATIKA YANG AKURAT
   const islandData = {
     Pulau_Sumatera: {
       name: "Pulau Sumatera (Aceh)",
@@ -77,11 +74,13 @@ const InsightPage = () => {
         <NavbarSection isAbsoluteBg={true} />
       </div>
       
-      <main className="flex-1 flex flex-col items-center px-6 pt-32 pb-24 max-w-5xl mx-auto w-full">
+      <main className="flex-1 flex flex-col items-center px-4 md:px-6 pt-32 pb-24 max-w-5xl mx-auto w-full">
         
         {/* --- AREA PETA INDONESIA --- */}
-        <div data-aos="fade-down" className="w-full max-w-7xl mx-auto drop-shadow-xl flex justify-center mb-12 relative z-10 overflow-x-auto md:overflow-x-visible">
-           <div className="min-w-[800px] w-full">
+        {/* justify-center diubah jadi justify-start di HP, baru justify-center di MD */}
+        <div data-aos="fade-down" className="w-full max-w-7xl mx-auto drop-shadow-xl flex justify-start md:justify-center mb-12 relative z-10 overflow-x-auto md:overflow-x-visible pb-4 hide-scrollbar">
+           {/* min-w diturunkan jadi 600px di HP agar tidak terlalu raksasa, pr-8 agar sisi kanan Papua tidak mentok */}
+           <div className="min-w-[600px] md:min-w-[800px] w-full pr-8 md:pr-0 pl-4 md:pl-0">
               <MapIndonesia onPilihPulau={setActiveIsland} />
            </div>
         </div>
@@ -99,34 +98,26 @@ const InsightPage = () => {
         {/* --- GRID CARD CHARTS --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full relative z-10">
            
-           {/* Card Pie Chart */}
            <div data-aos="fade-up" className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition duration-300">
               <div className="bg-inv-base text-white text-center py-3.5 px-4 rounded-xl font-base text-lg font-semibold mb-8 shadow-sm">
                 Jumlah Laki-laki dan Perempuan
               </div>
               <div className="flex-1 flex flex-col items-center justify-center relative">
-                
-                {/* Visual Pie Chart */}
                 <div 
                   className="w-40 h-40 md:w-48 md:h-48 rounded-full mb-8 drop-shadow-md flex items-center justify-center transition-all duration-700 ease-in-out"
-                  style={{
-                    background: `conic-gradient(#ef4444 0% ${currentData.pieData.wanita}%, #3b82f6 ${currentData.pieData.wanita}% 100%)`
-                  }}
+                  style={{ background: `conic-gradient(#ef4444 0% ${currentData.pieData.wanita}%, #3b82f6 ${currentData.pieData.wanita}% 100%)` }}
                 >
-                  {/* Lingkaran putih di tengah untuk efek Donut Chart */}
                   <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex flex-col items-center justify-center shadow-inner">
                      <span className="text-blue-500 font-bold text-sm">Pria: {currentData.pieData.pria}%</span>
                      <span className="text-red-500 font-bold text-sm">Wanita: {currentData.pieData.wanita}%</span>
                   </div>
                 </div>
-
                 <p className="text-gray-600 font-teachers text-sm text-center leading-relaxed h-20 transition-all duration-500">
                   {currentData.descPie}
                 </p>
               </div>
            </div>
 
-           {/* Card Bar Chart */}
            <div data-aos="fade-up" data-aos-delay="100" className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition duration-300">
               <div className="bg-inv-base text-white text-center py-3.5 px-4 rounded-xl font-base text-lg font-semibold mb-8 shadow-sm">
                 Jumlah Budaya

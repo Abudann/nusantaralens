@@ -5,11 +5,10 @@ const MapIndonesia = ( { onPilihPulau} ) => {
       {/* SVG Peta Indonesia */}
       <svg 
         width="100%" 
-        height="auto" 
-        viewBox="0 0 1440 543" 
+        viewBox="-40 0 1520 543" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-xl"
+        className="drop-shadow-xl overflow-visible h-auto"
       >
         <g id="indonesiaLow_1">
           

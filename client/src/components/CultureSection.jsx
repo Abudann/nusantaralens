@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import imgDummy1 from '../assets/heroes/soedirman.png';
-import imgDummy2 from '../assets/heroes/bung-tomo.png';
-import imgDummy3 from '../assets/heroes/kh-dewantara.png';
 import burungOrnament from '../assets/heroes/burung.png';
 import penariKiri from '../assets/heroes/penari-kiri.png';
 import penariKanan from '../assets/heroes/penari-kanan.png';
@@ -14,22 +11,44 @@ const CultureSection = () => {
   
   // State Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
-  // Mock data budaya
-  const cultures = [
-    { id: 1, name: "Wayang Kulit", region: "Jawa Tengah", image: imgDummy1 },
-    { id: 2, name: "Lompat Batu Nias", region: "Sumatra Utara", image: imgDummy2 },
-    { id: 3, name: "Tradisi Pasola", region: "Sumba, NTT", image: imgDummy3 },
-    { id: 4, name: "Tari Kecak", region: "Bali", image: imgDummy1 },
-    { id: 5, name: "Reog Ponorogo", region: "Jawa Timur", image: imgDummy2 },
-    { id: 6, name: "Upacara Ngaben", region: "Bali", image: imgDummy3 },
-  ];
+  // State untuk API Data Budaya
+  const [cultures, setCulturesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Logic filter pencarian
+  // Fungsi Fetch API Budaya & Tradisi
+  useEffect(() => {
+    const fetchCultures = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('https://nusantaralens.vercel.app/cultures', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': '237aa5e59230a900ed4d1e632c5bf9e4a03d4f79d68ae991cd0aaaa2416b95e0'
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          setCulturesData(result.data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data budaya:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCultures();
+  }, []);
+
+  // Logic filter pencarian (Aman dengan optional chaining ?.)
   const filteredCultures = cultures.filter((culture) =>
-    culture.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    culture.region.toLowerCase().includes(searchQuery.toLowerCase())
+    culture.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    culture.region?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Logic Pagination
@@ -80,9 +99,19 @@ const CultureSection = () => {
         </div>
       </div>
 
-      {/* Render Data dengan Pagination (currentCultures) */}
+      {/* GRID BUDAYA & TRADISI */}
       <div className="w-full max-w-5xl mx-auto px-6 pb-16 relative z-10 min-h-[400px]">
-        {currentCultures.length > 0 ? (
+        {isLoading ? (
+          // Skeleton Loading saat menunggu data API
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="rounded-3xl overflow-hidden shadow-sm aspect-[3/4] bg-gray-200 animate-pulse relative">
+                <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/20"></div>
+              </div>
+            ))}
+          </div>
+        ) : currentCultures.length > 0 ? (
+          // Render Data Asli dari Backend
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {currentCultures.map((culture, index) => (
               <div 
@@ -91,7 +120,8 @@ const CultureSection = () => {
                 data-aos-delay={index * 50}
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200"
               >
-                <img src={culture.image} alt={culture.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                {/* Mengakomodasi jika key image berbentuk image_url atau image */}
+                <img src={culture.image_url || culture.image} alt={culture.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 text-left">
                   <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">{culture.name}</h3>
@@ -101,6 +131,7 @@ const CultureSection = () => {
             ))}
           </div>
         ) : (
+          // Tampilan data tidak ditemukan
           <div className="w-full flex flex-col items-center justify-center py-20 text-gray-500">
             <FaMagnifyingGlass size={32} className="mb-4 text-gray-300" />
             <p className="font-teachers text-lg">Budaya "{searchQuery}" tidak ditemukan.</p>
@@ -109,7 +140,7 @@ const CultureSection = () => {
       </div>
 
       {/* PAGINATION CONTROLS */}
-      {totalPages > 1 && (
+      {totalPages > 1 && !isLoading && (
         <div data-aos="fade-up" className="w-full flex justify-center items-center gap-2 md:gap-3 mb-24 relative z-10">
           <button 
             onClick={handlePrevPage}
@@ -147,6 +178,7 @@ const CultureSection = () => {
         </div>
       )}
 
+      {/* QUOTE SECTION */}
       <div className="relative w-full max-w-6xl mx-auto px-4 md:px-6 pb-24 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-8 z-10">
         <div data-aos="fade-right" data-aos-duration="1500" className="w-32 md:w-48 lg:w-56 pointer-events-none drop-shadow-sm flex-shrink-0">
           <img src={penariKiri} alt="Ornamen Penari Kiri" className="w-full h-auto" />

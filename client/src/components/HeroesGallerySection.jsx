@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-// Import ornamen tetap dipertahankan
 import burungOrnament from '../assets/heroes/burung.png';
 import penariKiri from '../assets/heroes/penari-kiri.png';
 import penariKanan from '../assets/heroes/penari-kanan.png';
@@ -12,7 +11,7 @@ const HeroesGallerySection = () => {
   
   // State Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Dibuat 6 per halaman biar gridnya pas
+  const itemsPerPage = 6;
 
   // State untuk API Data
   const [heroes, setHeroesData] = useState([]);

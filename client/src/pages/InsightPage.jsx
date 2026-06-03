@@ -30,11 +30,11 @@ const InsightPage = () => {
   const initialIsland = location.state?.selectedIsland || 'Pulau_Sumatera';
   const [activeIsland, setActiveIsland] = useState(initialIsland);
   
-  // State untuk nyimpen data dari API Mas Gilang
+
   const [apiData, setApiData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fungsi Fetch API dengan Radar Detektor
+  // Fungsi Fetch API dengan API KEY
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -46,11 +46,18 @@ const InsightPage = () => {
       console.log(`🚀 [Mencoba Fetch API] -> ${apiUrl}`);
 
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': '237aa5e59230a900ed4d1e632c5bf9e4a03d4f79d68ae991cd0aaaa2416b95e0'
+          }
+        });
+        
         console.log(`📡 [Status HTTP] -> ${response.status} ${response.statusText}`);
 
         if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status} - Pastikan link API benar!`);
+          throw new Error(`HTTP Error: ${response.status} - Pastikan link API benar & CORS sudah update!`);
         }
 
         const result = await response.json();
@@ -95,7 +102,7 @@ const InsightPage = () => {
       }
     }
 
-    // 3. Ambil Ekonomi (Set 0 jika kosong sesuai arahan Mas Gilang)
+    // 3. Ambil Ekonomi (Set 0 jika kosong)
     if (apiData.economic_growths && apiData.economic_growths.length > 0) {
       ecoGrowth = parseFloat(apiData.economic_growths[0].growth_rate) || 0;
     }
@@ -167,7 +174,7 @@ const InsightPage = () => {
               </div>
            </div>
 
-           {/* KOTAK STATISTIK TAMBAHAN (Sesuai JSON Mas Gilang) */}
+           {/* KOTAK STATISTIK TAMBAHAN */}
            <div data-aos="fade-up" data-aos-delay="100" className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition duration-300 min-h-[350px]">
               <div className="bg-inv-base text-white text-center py-3.5 px-4 rounded-xl font-base text-lg font-semibold mb-8 shadow-sm">
                 Statistik Tambahan

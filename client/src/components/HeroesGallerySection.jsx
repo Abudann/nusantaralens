@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import imgSoedirman from '../assets/heroes/soedirman.png';
-import imgBungTomo from '../assets/heroes/bung-tomo.png';
-import imgKHDewantara from '../assets/heroes/kh-dewantara.png';
-import imgTanMalaka from '../assets/heroes/tan-malaka.png';
-import imgCutNyakDhien from '../assets/heroes/cut-nyak-dhien.png';
-import imgRaKartini from '../assets/heroes/ra-kartini.png';
+// Import ornamen tetap dipertahankan
 import burungOrnament from '../assets/heroes/burung.png';
 import penariKiri from '../assets/heroes/penari-kiri.png';
 import penariKanan from '../assets/heroes/penari-kanan.png';
@@ -17,21 +12,43 @@ const HeroesGallerySection = () => {
   
   // State Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; // Set 3 per halaman untuk test (bisa diganti 6 nanti)
+  const itemsPerPage = 6; // Dibuat 6 per halaman biar gridnya pas
 
-  // Data statis heroes (Nanti direplace pakai fetch API)
-  const heroes = [
-    { id: 1, name: "Jendral Soedirman", years: "1916 - 1950", image: imgSoedirman },
-    { id: 2, name: "Bung Tomo", years: "1920 - 1981", image: imgBungTomo },
-    { id: 3, name: "KH Dewantara", years: "1889 - 1959", image: imgKHDewantara },
-    { id: 4, name: "Tan Malaka", years: "1897 - 1949", image: imgTanMalaka },
-    { id: 5, name: "Cut Nyak Dhien", years: "1848 - 1908", image: imgCutNyakDhien },
-    { id: 6, name: "R.A Kartini", years: "1879 - 1904", image: imgRaKartini },
-  ];
+  // State untuk API Data
+  const [heroes, setHeroesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fungsi Fetch API Pahlawan
+  useEffect(() => {
+    const fetchHeroes = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('https://nusantaralens.vercel.app/heroes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': '237aa5e59230a900ed4d1e632c5bf9e4a03d4f79d68ae991cd0aaaa2416b95e0'
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          setHeroesData(result.data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data pahlawan:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchHeroes();
+  }, []);
 
   // Logic Search
   const filteredHeroes = heroes.filter((hero) =>
-    hero.name.toLowerCase().includes(searchQuery.toLowerCase())
+    hero.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Logic Pagination
@@ -86,9 +103,19 @@ const HeroesGallerySection = () => {
         </div>
       </div>
 
-      {/* GRID GALERI PAHLAWAN (Render currentHeroes, bukan filteredHeroes) */}
+      {/* GRID GALERI PAHLAWAN */}
       <div className="w-full max-w-5xl mx-auto px-6 pb-16 relative z-10 min-h-[400px]">
-        {currentHeroes.length > 0 ? (
+        {isLoading ? (
+          // Skeleton Loading
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="rounded-3xl overflow-hidden shadow-sm aspect-[3/4] bg-gray-200 animate-pulse relative">
+                <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/20"></div>
+              </div>
+            ))}
+          </div>
+        ) : currentHeroes.length > 0 ? (
+          // Data Asli
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {currentHeroes.map((hero, index) => (
               <div 
@@ -97,16 +124,21 @@ const HeroesGallerySection = () => {
                 data-aos-delay={index * 50}
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200"
               >
-                <img src={hero.image} alt={hero.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                {/* Fallback jika properti gambar menggunakan nama image_url atau image */}
+                <img src={hero.image_url || hero.image} alt={hero.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 text-left">
                   <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">{hero.name}</h3>
-                  <p className="text-gray-200 text-xs md:text-sm mt-1">{hero.years}</p>
+                  {/* Handle variasi key response JSON dari backend */}
+                  <p className="text-gray-200 text-xs md:text-sm mt-1">
+                    {hero.birth_year ? `${hero.birth_year} - ${hero.death_year}` : hero.years}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
+          // Empty State
           <div className="w-full flex flex-col items-center justify-center py-20 text-gray-500">
             <FaMagnifyingGlass size={32} className="mb-4 text-gray-300" />
             <p className="font-teachers text-lg">Pahlawan "{searchQuery}" tidak ditemukan.</p>
@@ -115,7 +147,7 @@ const HeroesGallerySection = () => {
       </div>
 
       {/* PAGINATION CONTROLS */}
-      {totalPages > 1 && (
+      {totalPages > 1 && !isLoading && (
         <div data-aos="fade-up" className="w-full flex justify-center items-center gap-2 md:gap-3 mb-24 relative z-10">
           
           <button 

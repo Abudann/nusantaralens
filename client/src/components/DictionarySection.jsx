@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import imgJawa from '../assets/heroes/soedirman.png';
-import imgSunda from '../assets/heroes/bung-tomo.png';
-import imgMinang from '../assets/heroes/kh-dewantara.png';
 import burungOrnament from '../assets/heroes/burung.png';
 import penariKiri from '../assets/heroes/penari-kiri.png';
 import penariKanan from '../assets/heroes/penari-kanan.png';
@@ -14,23 +11,48 @@ const DictionarySection = () => {
   
   // State Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
-  // Mock data kamus
-  const dictionaries = [
-    { id: 1, region: "Jawa", language: "Bahasa Jawa", image: imgJawa },
-    { id: 2, region: "Sunda", language: "Bahasa Sunda", image: imgSunda },
-    { id: 3, region: "Minangkabau", language: "Bahasa Minang", image: imgMinang },
-    { id: 4, region: "Batak", language: "Bahasa Batak", image: imgJawa },
-    { id: 5, region: "Bali", language: "Bahasa Bali", image: imgSunda },
-    { id: 6, region: "Bugis", language: "Bahasa Bugis", image: imgMinang },
-  ];
+  // State API Kamus
+  const [dictionaries, setDictionariesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Logic filter pencarian
-  const filteredDicts = dictionaries.filter((dict) =>
-    dict.region.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    dict.language.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Fungsi Fetch API Bahasa/Kamus
+  useEffect(() => {
+    const fetchDictionaries = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('https://nusantaralens.vercel.app/languages', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': '237aa5e59230a900ed4d1e632c5bf9e4a03d4f79d68ae991cd0aaaa2416b95e0'
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          setDictionariesData(result.data.languages || result.data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data kamus:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDictionaries();
+  }, []);
+
+  // Logic filter pencarian (Mendukung properti name/language dan region)
+  const filteredDicts = dictionaries.filter((dict) => {
+    const langName = dict.name || dict.language || '';
+    const regionName = dict.region || '';
+    
+    return langName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           regionName.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   // Logic Pagination
   const totalPages = Math.ceil(filteredDicts.length / itemsPerPage);
@@ -82,7 +104,16 @@ const DictionarySection = () => {
 
       {/* Render Data dengan Pagination (currentDicts) */}
       <div className="w-full max-w-5xl mx-auto px-6 pb-16 relative z-10 min-h-[400px]">
-        {currentDicts.length > 0 ? (
+        {isLoading ? (
+          // Skeleton Loading
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="rounded-3xl overflow-hidden shadow-sm aspect-[3/4] bg-gray-200 animate-pulse relative">
+                <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/20"></div>
+              </div>
+            ))}
+          </div>
+        ) : currentDicts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {currentDicts.map((dict, index) => (
               <div 
@@ -91,11 +122,11 @@ const DictionarySection = () => {
                 data-aos-delay={index * 50}
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200"
               >
-                <img src={dict.image} alt={dict.language} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={dict.image_url || dict.image} alt={dict.name || dict.language} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 text-left">
                   <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">{dict.region}</h3>
-                  <p className="text-gray-200 text-xs md:text-sm mt-1">{dict.language}</p>
+                  <p className="text-gray-200 text-xs md:text-sm mt-1">{dict.name || dict.language}</p>
                 </div>
               </div>
             ))}
@@ -109,7 +140,7 @@ const DictionarySection = () => {
       </div>
 
       {/* PAGINATION CONTROLS */}
-      {totalPages > 1 && (
+      {totalPages > 1 && !isLoading && (
         <div data-aos="fade-up" className="w-full flex justify-center items-center gap-2 md:gap-3 mb-24 relative z-10">
           <button 
             onClick={handlePrevPage}

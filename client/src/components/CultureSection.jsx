@@ -33,7 +33,7 @@ const CultureSection = () => {
         const result = await response.json();
         
         if (result.status === 'success') {
-          setCulturesData(result.data);
+          setCulturesData(result.data.cultures || result.data);
         }
       } catch (error) {
         console.error("Gagal mengambil data budaya:", error);
@@ -121,7 +121,7 @@ const CultureSection = () => {
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200"
               >
                 {/* Mengakomodasi jika key image berbentuk image_url atau image */}
-                <img src={culture.image_url || culture.image} alt={culture.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={culture.photo_url || culture.image_url || culture.image || culture.photo} alt={culture.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 text-left">
                   <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">{culture.name}</h3>

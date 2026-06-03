@@ -31,9 +31,8 @@ const HeroesGallerySection = () => {
         });
         
         const result = await response.json();
-        
         if (result.status === 'success') {
-          setHeroesData(result.data);
+          setHeroesData(result.data.heroes || result.data);
         }
       } catch (error) {
         console.error("Gagal mengambil data pahlawan:", error);
@@ -46,7 +45,8 @@ const HeroesGallerySection = () => {
   }, []);
 
   // Logic Search
-  const filteredHeroes = heroes.filter((hero) =>
+  const safeHeroes = Array.isArray(heroes) ? heroes : (heroes?.data || []);
+  const filteredHeroes = safeHeroes.filter((hero) =>
     hero.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -124,7 +124,7 @@ const HeroesGallerySection = () => {
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200"
               >
                 {/* Fallback jika properti gambar menggunakan nama image_url atau image */}
-                <img src={hero.image_url || hero.image} alt={hero.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={hero.photo_url || hero.image_url || hero.image || hero.photo} alt={hero.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 text-left">
                   <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">{hero.name}</h3>

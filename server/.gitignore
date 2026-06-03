@@ -1,0 +1,12 @@
+# ---- Back End ----
+.env
+.env.*
+!.env.example
+.prettierrc
+
+# uploads
+/uploads/*
+!/uploads/example_image.webp
+# Data
+/src/data/**/*.json
+!/src/data/**/example.json

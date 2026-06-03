@@ -1,230 +1,203 @@
-# Project Name
+# Nusantaralens API
 
-Nusantaralens API
+## Deskripsi Proyek
 
----
+Nusantaralens API merupakan layanan backend utama yang mendukung platform Nusantaralens. API ini dirancang untuk mengelola dan menyediakan data komprehensif mengenai pahlawan nasional Indonesia, bahasa daerah, serta berbagai warisan budaya Nusantara.
 
-## Description
+Dibangun menggunakan arsitektur Layered Architecture yang scalable, API ini berperan sebagai penghubung utama antar komponen dalam ekosistem aplikasi, meliputi:
 
-Nusantaralens API is the core backend service powering the Nusantaralens platform. It is designed to manage and deliver comprehensive data regarding Indonesian national heroes, regional languages, and diverse cultural heritage.
-
-Built with a scalable Layered Architecture, this API serves as the vital bridge connecting various components of the ecosystem:
-
-- AI Integration: Acts as the primary data provider for AI Chat services to ensure accurate cultural and historical context.
-
-- Front-end Gateway: Delivers structured and responsive data to the Nusantaralens web interface.
-
-- Data Management: Provides a centralized repository for Indonesia's rich historical and linguistic assets.
-
-Project Status: 🚧 In Active Development – Implementing core entities and global error handling systems.
+- Integrasi AI, sebagai penyedia data utama untuk layanan AI Chat agar mampu memberikan konteks budaya dan sejarah yang akurat.
+- Front-end Gateway, dengan menyediakan data yang terstruktur dan responsif untuk antarmuka website Nusantaralens.
+- Data Management, sebagai pusat pengelolaan data sejarah, bahasa, dan budaya Indonesia secara terintegrasi.
 
 ---
 
-<!-- ## Features
+## Environment Setup
 
-- RESTful API architecture
-- OpenAPI / Swagger documentation
-- PostgreSQL database integration
-- Error handling middleware
-- Validation system
-- Reusable response structure
-- Authentication & authorization (optional)
-- Redis caching (optional)
-- RabbitMQ message queue (optional)
+Project ini menggunakan konfigurasi environment yang dipisahkan untuk mode development dan production guna memudahkan pengelolaan konfigurasi aplikasi.
 
 ---
 
-## Technologies Used
+### 1. Setup Environment Development
 
-| Technology        | Description         |
-| ----------------- | ------------------- |
-| Node.js           | JavaScript runtime  |
-| Express.js        | Backend framework   |
-| PostgreSQL        | Relational database |
-| Redis             | Caching system      |
-| RabbitMQ          | Message queue       |
-| Swagger / OpenAPI | API documentation   |
-| JWT               | Authentication      |
+Buat file `.env` pada root project, kemudian sesuaikan nilainya dengan konfigurasi lokal Anda.
 
----
+```env id="m1n9qp"
+NODE_ENV=development
+PORT=5000
+HOST=localhost
 
-## Installation
+# PostgreSQL Configuration
+PG_USER=your_postgres_username
+PG_HOST=localhost
+PG_PASSWORD=your_postgres_password
+PG_DATABASE=your_local_database
+PG_PORT=5432
 
-Clone the repository:
+# Redis Configuration
+REDIS_HOST=localhost
+REDIS_PORT=6379
 
-```bash
-git clone <repository-url>
+# Cloudinary Configuration
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# Google Gemini Configuration
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_SYSTEM_PROMPT=your_system_prompt
+
+# External Service Configuration
+AI_MODEL_URL=hugging_face_url
+DS_URL=endpoint_to_insert_data
+
+# Security
+ADMIN_API_KEY=your_admin_api_key
+
+# Frontend Configuration
+FRONTEND_URL=http://localhost:5173
 ```
 
-Move to project directory:
+---
 
-```bash
-cd <project-folder>
+### 2. Setup Environment Production
+
+Untuk deployment production, gunakan file `.env.production`.
+
+```env id="7h6vse"
+NODE_ENV=production
+
+# PostgreSQL Connection || URL from neon.com
+DATABASE_URL=postgres://user:password@host:port/database
+
+# Redis Connection URL || URL from Upstash
+REDIS_URL=redis://user:password@host:port
+
+# Cloudinary Configuration
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# Google Gemini Configuration
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-2.5-flash
+
+# External Service Configuration
+AI_MODEL_URL=hugging_face_url
+DS_URL=endpoint_to_insert_data
+
+# Security
+ADMIN_API_KEY=your_admin_api_key
+
+# Frontend Configuration
+FRONTEND_URL=https://your-frontend-domain.com
 ```
 
-Install dependencies:
+---
+
+## Cara Menjalankan Aplikasi
+
+Setelah Anda selesai melakukan konfigurasi Environment Variables (`.env` atau `.env.production`), ikuti langkah-langkah di bawah ini untuk menjalankan server.
+
+### 1. Instalasi Dependensi
+
+Pastikan Anda menginstal semua _library_ yang dibutuhkan oleh proyek ini terlebih dahulu:
 
 ```bash
 npm install
+
 ```
 
 ---
 
-## Environment Variables
+### 2. Run Database Migration
 
-Create a `.env` file in the root directory and configure the following variables:
+Migration digunakan untuk membuat struktur tabel database.
 
-```env
-PORT=
-DATABASE_URL=
-JWT_SECRET=
-REDIS_URL=
-RABBITMQ_URL=
-```
-
-Example:
-
-```env
-PORT=3000
-DATABASE_URL=postgresql://postgres:password@localhost:5432/db_name
-JWT_SECRET=your_secret_key
-REDIS_URL=redis://localhost:6379
-RABBITMQ_URL=amqp://localhost
-```
-
----
-
-## Running the Project
-
-Development mode:
+### Development
 
 ```bash
-npm run dev
+npm run migrate:up
 ```
 
-Production mode:
+### Production
 
 ```bash
-npm start
+npm run migrate:up:prod
 ```
 
 ---
 
-## API Documentation
+## ⚠️ Important — Database Seeder
 
-Swagger documentation is available at:
+Aplikasi ini menggunakan mekanisme **database seeding otomatis** untuk mengisi data awal ke database.
 
-```txt
-http://localhost:3000/api-docs
+Sebelum menjalankan perintah seeder seperti:
+
+```bash id="j2m8vp"
+npm run seed:<name>:dev
+npm run seed:<name>:prod
 ```
 
----
+pastikan Anda sudah membaca dokumentasi tambahan mengenai:
 
-## Response Structure
+- Struktur file JSON
+- Penamaan file gambar
+- Konfigurasi environment
+- Endpoint untuk population seeder
+- Hal-hal yang dapat menyebabkan proses seeding gagal
 
-### Success Response
+Dokumentasi lengkap dapat dilihat di: [Database Seeder Documentation](./docs/additional_seeder.md)
 
-```json
-{
-  "status": "success",
-  "message": "Request successful",
-  "data": {}
-}
-```
+## 3. Start the Server
 
-### Failed Response
-
-```json
-{
-  "status": "failed",
-  "message": "Request failed"
-}
-```
-
-### Error Response
-
-```json
-{
-  "status": "error",
-  "message": "Internal server error"
-}
-```
-
----
-
-## Project Structure
-
-```txt
-src/
-├── controllers/
-├── routes/
-├── services/
-├── repositories/
-├── middlewares/
-├── validations/
-├── docs/
-├── config/
-└── app.js
-```
-
----
-
-## API Endpoints Overview
-
-| Method | Endpoint                   | Description           |
-| ------ | -------------------------- | --------------------- |
-| GET    | /heroes                    | Get all heroes        |
-| GET    | /culture                   | Get all cultures      |
-| GET    | /language/{iso_code}/words | Get words by language |
-
-For complete API documentation, please visit the Swagger documentation.
-
----
-
-## Error Handling
-
-This API uses centralized error handling middleware to standardize all server responses and improve maintainability.
-
-Internal server errors are hidden from clients to avoid exposing sensitive server information.
-
----
-
-## Authentication
-
-This API uses Bearer Token authentication.
-
-Example:
-
-```http
-Authorization: Bearer <your_token>
-```
-
----
-
-## Testing
-
-Run tests using:
+### Development Mode
 
 ```bash
-npm test
+npm run start:dev
+```
+
+### Production Mode
+
+```bash
+npm run start:prod
 ```
 
 ---
 
-## Deployment
+## Notes
 
-This API can be deployed using:
-
-- Vercel
-- Railway
-- Render
-- VPS
-- Docker
+- Pastikan PostgreSQL dan Redis telah aktif sebelum menjalankan aplikasi.
+- Endpoint admin `/admin/sync/populations` memerlukan `ADMIN_API_KEY`.
+- File `.env` dan `.env.production` tidak boleh diunggah ke repository publik.
+- Jalankan migration sebelum menjalankan seeder.
+- Server harus aktif sebelum menggunakan endpoint sinkronisasi atau input data.
 
 ---
--->
+
+## 🔌 API Documentation (Interactive UI)
+
+Proyek ini telah dilengkapi dengan dokumentasi interaktif menggunakan **OpenAPI Specification 3.0** dan **Swagger UI**. Seluruh skema data, parameter, _request body_, dan contoh respon dari endpoint `Heroes`, `Cultures`, `Languages`, `Populations`, dan `AI Assistant` dapat diakses secara langsung melalui browser Anda.
+
+### Cara Mengakses Dokumentasi:
+
+- **Lingkungan Pengembangan (Localhost / Development):**
+  1. Pastikan server lokal Anda telah menyala (`npm run start:dev`).
+  2. Akses tautan berikut di browser Anda:
+     👉 **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)**
+
+- **Lingkungan Produksi (Live Server / Production):**
+  Dokumentasi ini juga dapat diakses langsung secara online tanpa perlu menjalankan server lokal. Akses tautan publik proyek Anda dengan akhiran `/api-docs`:
+  👉 **`https://nusantaralens.vercel.app/api-docs`**
+
+### Fitur Utama Dokumentasi:
+
+- **Live Testing:** Anda dapat langsung menguji respon dari database (_Try it out_) namun jika anda menggunakan sever lokal.
+- **Skema Terstruktur:** Panduan lengkap mengenai tipe data input (request body) yang divalidasi oleh sistem.
+
 ## Author
 
 Name: Gilang Mayong Saputra
 
-GitHub: [https://github.com/MayongPutra14](https://github.com/MayongPutra14) 
+GitHub: [https://github.com/MayongPutra14](https://github.com/MayongPutra14)

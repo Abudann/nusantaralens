@@ -1,7 +1,9 @@
 import { Pool } from 'pg';
 
 const isProduction = process.env.NODE_ENV === 'production';
-console.log(`Using Environmnet:  ${process.env.NODE_ENV}`);
+console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
+console.log('DATABASE_URL EXISTS:', !!process.env.DATABASE_URL);
+
 export const pool = new Pool(
   isProduction
     ? {

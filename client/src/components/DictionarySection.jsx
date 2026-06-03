@@ -31,7 +31,7 @@ const DictionarySection = () => {
         });
         
         const result = await response.json();
-        console.log("📦 DATA KAMUS DARI MAS GILANG:", result);
+        
         if (result.status === 'success') {
           const rawCodes = result.data.iso_codes || [];
 

@@ -10,7 +10,8 @@ const DATA_PENDUDUK_DIR = path.join(
 );
 
 const TARGET_API_URL =
-  process.env.DS_URL || 'http://localhost:5000/admin/sync/populations';
+  `${process.env.DS_URL}/populations` ||
+  'http://localhost:5000/admin/sync/populations';
 const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
 
 const findJsonFiles = async (dir, fileList = []) => {
@@ -87,7 +88,7 @@ const runSync = async () => {
 
     console.log('\n====== ALL SYNCHRONIZATIONS IS DONE ======');
   } catch (error) {
-    console.error('Terjadi error fatal pada runner:', error.message);
+    console.error('Fatal error occurred on the seeder:', error.message);
   }
 };
 

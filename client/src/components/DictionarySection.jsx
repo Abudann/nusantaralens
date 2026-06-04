@@ -37,7 +37,7 @@ const DictionarySection = () => {
 
           const mappedDictionaries = rawCodes.map((code) => {
             const languageMap = {
-              'jv': { name: 'Bahasa Jawa', region: 'Jawa Tengah / Timur', image: 'https://images.unsplash.com/photo-1604928153303-393cb148bf56?q=80&w=800' },
+              'jv': { name: 'Bahasa Jawa', region: 'Jawa', image: 'https://images.unsplash.com/photo-1572146452136-1e9b25126046?auto=format&fit=crop&q=80&w=800' },
               'ace': { name: 'Bahasa Aceh', region: 'Nanggroe Aceh Darussalam', image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?q=80&w=800' },
               'abui': { name: 'Bahasa Abui', region: 'Nusa Tenggara Timur', image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=800' },
             };

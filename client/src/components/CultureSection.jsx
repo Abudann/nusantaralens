@@ -287,7 +287,7 @@ const CultureSection = () => {
             className="bg-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative my-auto animate-scaleUp border border-gray-100"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* MODAL: CLOSE BUTTON */}
+            {/* Tombol Close */}
             <button
               onClick={() => setSelectedCulture(null)}
               className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-black/40 text-white hover:bg-black/60 md:bg-gray-100 md:text-gray-600 md:hover:bg-gray-200 transition-colors shadow-lg"
@@ -295,7 +295,7 @@ const CultureSection = () => {
               <FaXmark size={20} />
             </button>
 
-            {/*  Warisan Budaya */}
+            {/*  FOTO WARISAN BUDAYA */}
             <div className="w-full md:w-2/5 h-80 md:h-auto min-h-[350px] md:min-h-[480px] relative bg-neutral-950 flex-shrink-0 overflow-hidden flex items-center justify-center">
               <img
                 src={
@@ -307,7 +307,7 @@ const CultureSection = () => {
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover blur-xl opacity-25 scale-110 pointer-events-none"
               />
-              {/* MAIN PHOTO */}
+              {/* Foto Utama */}
               <img
                 src={
                   selectedCulture.photo_url ||
@@ -334,6 +334,7 @@ const CultureSection = () => {
                   Deskripsi Lengkap & Nilai Filosofis:
                 </h4>
 
+                {/* Paragraf loss total tanpa max-height, murni mengikuti kuantitas teks dari API */}
                 <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify font-regular">
                   {selectedCulture.description ||
                     "Informasi deskripsi mendalam mengenai warisan kebudayaan daerah ini sedang dalam proses penyusunan literatur akademik."}

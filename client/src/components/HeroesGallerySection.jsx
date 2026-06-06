@@ -40,7 +40,6 @@ const HeroesGallerySection = () => {
           },
         );
         const result = await response.json();
-        console.log(result);
         if (result.status === "success") {
           setHeroesData(result.data.heroes || result.data);
         }
@@ -81,7 +80,7 @@ const HeroesGallerySection = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-  // LOCK SCROLL BODY WHEN POPUP APPEAR
+  // Kunci scroll body saat modal terbuka agar tidak berantakan
   useEffect(() => {
     if (selectedHero) {
       document.body.style.overflow = "hidden";
@@ -113,7 +112,7 @@ const HeroesGallerySection = () => {
       <div className="relative w-full max-w-5xl mx-auto px-6 pb-16 flex flex-col items-center text-center z-10">
         <div
           data-aos="fade-left"
-          className="absolute right-4 md:-right-6 -top-10 w-20 md:w-32 pointer-events-none opacity-80 drop-shadow-md"
+          className="absolute right-2 md:-right-6 -top-10 w-20 md:w-32 pointer-events-none opacity-80 drop-shadow-md"
         >
           <img
             src={burungOrnament}
@@ -142,7 +141,7 @@ const HeroesGallerySection = () => {
           latar belakang perjuangan setiap sosok.
         </p>
 
-        {/* INPUT SEARCH */}
+        {/* Input Search */}
         <div
           data-aos="zoom-in"
           data-aos-delay="400"
@@ -274,14 +273,14 @@ const HeroesGallerySection = () => {
       {/* COMPONENT MODAL DETAIL */}
       {selectedHero && (
         <div
-          className="fixed inset-0 z-[999] overflow-y-auto bg-black/80 backdrop-blur-md mt-20 px-4 py-20 md:py-12 flex items-start justify-center animate-fadeIn"
+          className="fixed inset-0 z-[999] overflow-y-auto bg-black/80 backdrop-blur-md mt-16 -20 px-4 py-20 md:py-12 md:mt   flex items-start justify-center animate-fadeIn"
           onClick={() => setSelectedHero(null)}
         >
           <div
             className="bg-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative my-auto animate-scaleUp border border-gray-100"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* MODAL: CLOSE BUTTON  */}
+            {/* Tombol Close Pojok Atas */}
             <button
               onClick={() => setSelectedHero(null)}
               className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-black/40 text-white hover:bg-black/60 md:bg-gray-100 md:text-gray-600 md:hover:bg-gray-200 transition-colors shadow-lg"
@@ -289,7 +288,7 @@ const HeroesGallerySection = () => {
               <FaXmark size={20} />
             </button>
 
-            {/* HEROES PHOTO */}
+            {/* FOTO PAHLAWAN */}
             <div className="w-full md:w-2/5 h-80 md:h-auto min-h-[350px] md:min-h-[500px] relative bg-neutral-900 flex-shrink-0 overflow-hidden flex items-center justify-center">
               {/* Background Blurred Effect*/}
               <img
@@ -302,7 +301,7 @@ const HeroesGallerySection = () => {
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 scale-110 pointer-events-none"
               />
-              {/* MAIN PHOTO */}
+              {/* Foto Utama */}
               <img
                 src={
                   selectedHero.photo_url ||
@@ -323,7 +322,7 @@ const HeroesGallerySection = () => {
                   {selectedHero.name}
                 </h2>
 
-                {/* GRID PHOTO DAN DETAILS */}
+                {/* GRID FOTO DAN DETAILS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50/70 p-4 rounded-2xl border border-gray-100 mb-6 text-left">
                   <div>
                     <p className="text-[11px] font-medium uppercase tracking-wider text-gray-400">
@@ -360,7 +359,7 @@ const HeroesGallerySection = () => {
 
                 <hr className="border-gray-100 my-4" />
 
-                {/* MAIN DESCRIPTION */}
+                {/* DESKRIPSI UTAMA */}
                 <h4 className="text-sm font-bold text-gray-800 uppercase tracking-wider mb-2.5">
                   Ringkasan Sejarah & Perjuangan:
                 </h4>
@@ -369,7 +368,7 @@ const HeroesGallerySection = () => {
                     "Informasi narasi sejarah mengenai tokoh pahlawan ini sedang diperbarui oleh tim arsip negara."}
                 </p>
 
-                {/* SK NUMBER */}
+                {/* NOMOR SK */}
                 {selectedHero.ascencion_document_number && (
                   <div className="mt-5 p-3 bg-neutral-50 rounded-xl border border-neutral-100 text-left">
                     <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">

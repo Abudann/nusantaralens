@@ -361,36 +361,41 @@ const DictionarySection = () => {
                 data-aos="fade-up"
                 data-aos-delay={index * 50}
                 onClick={() => {
-                  console.log("Kartu diklik! ID Bahasa:", dict.id);
                   setSelectedIso(dict.id);
                 }}
                 className="relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[3/4] bg-gray-200 z-30 pointer-events-auto"
               >
-                <img
-                  src={dict.image || dict.image_url}
-                  alt={dict.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute bottom-0 left-0 w-full h-[35%] bg-black/60 backdrop-blur-[2px] transition-all duration-300"></div>
-                <div className="absolute bottom-0 left-0 w-full p-6 text-left">
-                  <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md">
-                    {dict.region}
-                  </h3>
-                  <p className="text-gray-200 text-xs md:text-sm mt-1">
-                    {dict.name || dict.language}
-                  </p>
+              <img
+                    src={dict.image || dict.image_url}
+                    alt={dict.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:from-black/95 transition-all duration-300"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-6 text-left transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-white font-bold text-lg md:text-xl font-base drop-shadow-md tracking-wide line-clamp-2">
+                      {dict.region}
+                    </h3>
+                    <p className="text-gray-300 text-xs md:text-sm mt-2 font-medium tracking-wider bg-white/10 backdrop-blur-sm inline-block px-3 py-1 rounded-full border border-white/10">
+                      {dict.name || dict.language}
+                    </p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          ): (
+            <div className="w-full flex flex-col items-center justify-center py-24 text-gray-400 bg-white rounded-3xl shadow-inner border border-gray-50">
+              <div className="p-4 bg-gray-50 rounded-full mb-4">
+                <FaMagnifyingGlass size={40} className="text-gray-300" />
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="w-full flex flex-col items-center justify-center py-20 text-gray-500">
-            <FaMagnifyingGlass size={32} className="mb-4 text-gray-300" />
-            <p className="font-teachers text-lg">
-              Kamus "{searchQuery}" tidak ditemukan.
-            </p>
-          </div>
-        )}
+              <p className="font-teachers text-lg font-semibold text-gray-500">
+                Kamus Tidak Ditemukan
+              </p>
+              <p className="text-sm text-gray-400 mt-1">
+                Tidak ada kamus daerah untuk kata kunci "{searchQuery}"
+              </p>
+            </div>
+          )}
       </div>
 
       {/* PAGINATION CONTROLS */}

@@ -212,7 +212,7 @@ const HeroesGallerySection = () => {
               Pahlawan Tidak Ditemukan
             </p>
             <p className="text-sm text-gray-400 mt-1">
-              Tidak ada hasil untuk kata kunci "{searchQuery}"
+              Tidak ada pahlawan untuk kata kunci "{searchQuery}"
             </p>
           </div>
         )}
@@ -387,7 +387,7 @@ const HeroesGallerySection = () => {
                   onClick={() => setSelectedHero(null)}
                   className="w-full sm:w-auto px-8 py-3 rounded-xl bg-inv-base text-white font-bold text-sm shadow-md hover:bg-inv-base/90 active:scale-95 transition-all text-center tracking-wide"
                 >
-                  Tutup Lembar Profil
+                  Tutup Profil
                 </button>
               </div>
             </div>

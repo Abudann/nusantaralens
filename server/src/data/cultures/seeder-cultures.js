@@ -25,8 +25,6 @@ const seedCultures = async () => {
     const rawData = await fs.readFile(jsonPath, 'utf-8');
     const cultures = JSON.parse(rawData);
 
-    console.log(`Structuring Bulk Insert query for ${values.length} rows...`);
-
     const values = [];
     let count = 1;
 
@@ -53,6 +51,7 @@ const seedCultures = async () => {
         culture.name.trim(),
         uploadResult.secure_url,
         culture.description,
+        culture.region || null,
         now,
         now,
       ]);

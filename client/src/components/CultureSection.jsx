@@ -347,7 +347,7 @@ const CultureSection = () => {
                   onClick={() => setSelectedCulture(null)}
                   className="w-full sm:w-auto px-8 py-3 rounded-xl bg-inv-base text-white font-bold text-sm shadow-md hover:bg-inv-base/90 active:scale-95 transition-all text-center tracking-wide"
                 >
-                  Kembali ke Galeri
+                  Tutup Profile
                 </button>
               </div>
             </div>
